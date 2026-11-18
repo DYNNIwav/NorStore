@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { CartProvider } from '@/context/CartContext';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { ToastContainer } from '@/components/Toast';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'NorStore | Modern Online Shop',
-  description: 'Online shop built with Next.js and TypeScript for JavaScript Frameworks.',
+  description: 'Online shop built with Next.js and TypeScript for the JavaScript Frameworks course.',
 };
 
 export default function RootLayout({
@@ -29,10 +31,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#f6f7fb] text-[#1d2433]">
-        <Header />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <Footer />
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900">
+        <CartProvider>
+          <Header />
+          <main className="flex-1 flex flex-col">{children}</main>
+          <Footer />
+          <ToastContainer />
+        </CartProvider>
       </body>
     </html>
   );
