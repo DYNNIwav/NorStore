@@ -20,7 +20,7 @@ export default async function HomePage() {
           Store Catalog
         </h1>
         <p className="text-xs sm:text-sm text-[#6e7787]">
-          Browse our collection of products with live Noroff API data.
+          Explore our curated collection of quality products.
         </p>
       </section>
 

@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'NorStore | Modern Online Shop',
-  description: 'Online shop built with Next.js and TypeScript for the JavaScript Frameworks course.',
+  description: 'Modern e-commerce store built with Next.js and TypeScript.',
 };
 
 export default function RootLayout({
