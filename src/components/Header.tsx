@@ -26,8 +26,8 @@ export function Header() {
         </Link>
 
         {/* Navigation & Cart */}
-        <div className="flex items-center gap-6">
-          <nav className="flex items-center gap-5">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <nav className="flex items-center gap-3 sm:gap-5">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (

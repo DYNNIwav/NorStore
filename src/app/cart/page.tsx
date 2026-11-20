@@ -58,75 +58,82 @@ export default function CartPage() {
               const lineTotal = unitPrice * quantity;
 
               return (
-                <div key={product.id} className="p-4 flex gap-4 items-center">
-                  {/* Thumbnail */}
-                  <Link
-                    href={`/product/${product.id}`}
-                    className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-md overflow-hidden bg-[#f6f7fb] shrink-0 border border-[#dfe3ea]"
-                  >
-                    <Image
-                      src={product.image.url}
-                      alt={product.image.alt || product.title}
-                      fill
-                      sizes="80px"
-                      className="object-cover"
-                    />
-                  </Link>
-
-                  {/* Title & Price */}
-                  <div className="flex-1 min-w-0 space-y-1">
+                <div
+                  key={product.id}
+                  className="p-4 flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center justify-between"
+                >
+                  {/* Thumbnail & Title/Price */}
+                  <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
                     <Link
                       href={`/product/${product.id}`}
-                      className="font-semibold text-sm text-[#112038] hover:text-[#5e60ce] transition-colors line-clamp-1"
+                      className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-md overflow-hidden bg-[#f6f7fb] shrink-0 border border-[#dfe3ea]"
                     >
-                      {product.title}
+                      <Image
+                        src={product.image.url}
+                        alt={product.image.alt || product.title}
+                        fill
+                        sizes="80px"
+                        className="object-cover"
+                      />
                     </Link>
 
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-xs text-[#112038]">
-                        ${unitPrice.toFixed(2)}
-                      </span>
-                      {hasDiscount && (
-                        <span className="text-[11px] text-[#6e7787] line-through">
-                          ${product.price.toFixed(2)}
+                    <div className="flex-1 min-w-0 space-y-1">
+                      <Link
+                        href={`/product/${product.id}`}
+                        className="font-semibold text-sm text-[#112038] hover:text-[#5e60ce] transition-colors line-clamp-1"
+                      >
+                        {product.title}
+                      </Link>
+
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-xs text-[#112038]">
+                          ${unitPrice.toFixed(2)}
                         </span>
-                      )}
+                        {hasDiscount && (
+                          <span className="text-[11px] text-[#6e7787] line-through">
+                            ${product.price.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Quantity Stepper */}
-                  <div className="flex items-center border border-[#dfe3ea] rounded-md bg-[#f6f7fb] px-2 py-1 shrink-0">
-                    <button
-                      onClick={() => updateQuantity(product.id, quantity - 1)}
-                      className="text-[#6e7787] hover:text-[#112038] p-0.5"
-                      aria-label="Decrease quantity"
-                    >
-                      <Minus className="w-3 h-3" />
-                    </button>
-                    <span className="w-7 text-center text-xs font-semibold text-[#112038]">
-                      {quantity}
-                    </span>
-                    <button
-                      onClick={() => updateQuantity(product.id, quantity + 1)}
-                      className="text-[#6e7787] hover:text-[#112038] p-0.5"
-                      aria-label="Increase quantity"
-                    >
-                      <Plus className="w-3 h-3" />
-                    </button>
-                  </div>
+                  {/* Quantity Stepper & Line Total */}
+                  <div className="flex items-center justify-between sm:justify-end gap-4 pl-[76px] sm:pl-0 pt-2 sm:pt-0 border-t border-[#dfe3ea]/40 sm:border-0">
+                    {/* Stepper */}
+                    <div className="flex items-center border border-[#dfe3ea] rounded-md bg-[#f6f7fb] px-2 py-1 shrink-0">
+                      <button
+                        onClick={() => updateQuantity(product.id, quantity - 1)}
+                        className="text-[#6e7787] hover:text-[#112038] p-0.5"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus className="w-3 h-3" />
+                      </button>
+                      <span className="w-7 text-center text-xs font-semibold text-[#112038]">
+                        {quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(product.id, quantity + 1)}
+                        className="text-[#6e7787] hover:text-[#112038] p-0.5"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </button>
+                    </div>
 
-                  {/* Line Total & Remove */}
-                  <div className="text-right shrink-0 min-w-[65px]">
-                    <span className="block font-bold text-xs text-[#112038]">
-                      ${lineTotal.toFixed(2)}
-                    </span>
-                    <button
-                      onClick={() => removeFromCart(product.id)}
-                      className="mt-1 text-[#6e7787] hover:text-[#dc2f3a] p-0.5 transition-colors"
-                      aria-label={`Remove ${product.title} from cart`}
-                    >
-                      <Trash2 className="w-3.5 h-3.5 ml-auto" />
-                    </button>
+                    {/* Total & Remove */}
+                    <div className="flex items-center sm:block sm:text-right gap-3 sm:gap-0 shrink-0 min-w-[70px]">
+                      <span className="block font-bold text-xs text-[#112038]">
+                        ${lineTotal.toFixed(2)}
+                      </span>
+                      <button
+                        onClick={() => removeFromCart(product.id)}
+                        className="text-[#6e7787] hover:text-[#dc2f3a] p-0.5 transition-colors sm:mt-1"
+                        aria-label={`Remove ${product.title} from cart`}
+                      >
+                        <Trash2 className="w-3.5 h-3.5 ml-auto" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
